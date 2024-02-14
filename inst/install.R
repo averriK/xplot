@@ -1,0 +1,11 @@
+library(devtools)
+library(roxygen2)
+library(usethis)
+file.remove("NAMESPACE")
+usethis::use_apache_license()
+devtools::document()
+devtools::check()
+remove.packages("SmartPubs")
+devtools::install()
+## Commit Push
+remotes::install_github("averrik/smartpubs",auth_token = Sys.getenv("PAT"))
