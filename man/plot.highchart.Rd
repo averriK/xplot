@@ -103,7 +103,13 @@ Title
 }
 \examples{
 data(iris)
-DT <- data.frame(ID=iris$Species,X=iris$Sepal.Length,Y=iris$Sepal.Width)
-plot.highchart(data=DT)
+DT <- data.table(ID=iris$Species,X=iris$Sepal.Length,Y=iris$Sepal.Width)
+P1 <- plot.highchart(data=DT,plot.type="scatter")
+P1
+
+# Multiple series
+DT2 <- DT[,.(X,Y=mean(Y)),by="ID"]
+P2 <- plot.highchart(data=DT2,plot.object=P1,plot.type="line")
+P2
 
 }

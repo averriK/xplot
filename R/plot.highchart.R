@@ -36,8 +36,14 @@
 #' 
 #' @examples
 #' data(iris)
-#' DT <- data.frame(ID=iris$Species,X=iris$Sepal.Length,Y=iris$Sepal.Width)
-#' plot.highchart(data=DT)
+#' DT <- data.table(ID=iris$Species,X=iris$Sepal.Length,Y=iris$Sepal.Width)
+#' P1 <- plot.highchart(data=DT,plot.type="scatter")
+#' P1
+#' 
+#' # Multiple series
+#' DT2 <- DT[,.(X,Y=mean(Y)),by="ID"]
+#' P2 <- plot.highchart(data=DT2,plot.object=P1,plot.type="line")
+#' P2
 #' 
 #' @importFrom grDevices hcl.colors
 #' @importFrom highcharter hc_add_series
@@ -62,7 +68,6 @@
 plot.highchart <- function(
     data,
     plot.object=NA,
-    
     plot.title=NA,
     plot.subtitle=NA,
     plot.height=NA,
@@ -103,7 +108,7 @@ plot.highchart <- function(
   TIP = "{{group.legend}}:{point.series.name}<br> {{xAxis.legend}}={point.x}<br> {{yAxis.legend}}={point.y}" |> epoxy::epoxy_html()
   COLORS <- grDevices::hcl.colors(n=max(2,length(unique(DATA$ID))),palette = color.palette)
   
-  if(is.na(plot.object)){
+  if(all(is.na(plot.object)) ==TRUE){
     PLOT <- highchart()
     
     # c("line","spline","point","column","bar")
@@ -226,7 +231,7 @@ plot.highchart <- function(
     }
   }
   
-  if(!is.na(plot.object)){
+  if(all(is.na(plot.object)) ==FALSE){
     PLOT <- plot.object
     
     
