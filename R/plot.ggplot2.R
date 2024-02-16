@@ -103,7 +103,7 @@ plot.ggplot2 <- function(
   }
   DATA <- data[,c("ID","X","Y")]
   
-  if(is.na(plot.object)){
+  if(all(is.na(plot.object)) ==TRUE){
     PLOT <- ggplot(
       data=DATA,
       aes(x=X,y=Y,group=ID,color=ID),
@@ -200,8 +200,8 @@ plot.ggplot2 <- function(
     }
   }
   
-  if(!is.na(plot.object)){
-    
+  if(all(is.na(plot.object)) ==FALSE){
+    PLOT <- plot.object
   }
   
 
