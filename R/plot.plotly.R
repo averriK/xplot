@@ -15,6 +15,8 @@
 #' @param yAxis.log boolean
 #' @param xAxis.reverse boolean
 #' @param yAxis.reverse boolean
+#' @param line.size numeric
+#' @param point.size numeric
 #' @param xAxis.max numeric
 #' @param yAxis.max numeric
 #' @param xAxis.min numeric
@@ -37,6 +39,8 @@
 #' DT <- data.frame(ID=iris$Species,X=iris$Sepal.Length,Y=iris$Sepal.Width)
 #' plot.plotly(data=DT)
 #' 
+#' @importFrom data.table data.table
+#' @importFrom data.table as.data.table 
 #' @importFrom plotly plot_ly
 #' @importFrom plotly add_trace
 #' @importFrom plotly layout
@@ -63,6 +67,8 @@ plot.plotly <- function(
     yAxis.log=FALSE,
     xAxis.reverse=FALSE,
     yAxis.reverse=FALSE,
+    line.size=1,
+    point.size=2,
     xAxis.max=NA,
     yAxis.max=NA,
     xAxis.min=NA,
@@ -86,7 +92,7 @@ plot.plotly <- function(
   point.types <- c(circle = "circle", square = "square", diamond = "diamond", triangle = "triangle-up", "triangle-down" = "triangle-down")
   
   # Convertir estilos de línea y puntos a plotly
-  DATA <- data
+  DATA <- as.data.table(data)[,c("ID","X","Y")]
   line.style <- line.types[[line.style]]
   point.style <- point.types[[point.style]]
   

@@ -15,6 +15,8 @@
 #' @param yAxis.log boolean
 #' @param xAxis.reverse boolean
 #' @param yAxis.reverse boolean
+#' @param line.size numeric
+#' @param point.size numeric
 #' @param xAxis.max numeric
 #' @param yAxis.max numeric
 #' @param xAxis.min numeric
@@ -36,7 +38,9 @@
 #' data(iris)
 #' DT <- data.frame(ID=iris$Species,X=iris$Sepal.Length,Y=iris$Sepal.Width)
 #' plot.ggplot2(data=DT)
-#'
+#' 
+#' @importFrom data.table data.table
+#' @importFrom data.table as.data.table 
 #' @importFrom grDevices hcl.colors
 #' @importFrom ggplot2 aes
 #' @importFrom ggplot2 geom_line
@@ -78,6 +82,8 @@ plot.ggplot2 <- function(
     color.palette="viridis",
     plot.type="line",#line
     line.style="solid",
+    line.size=1,
+    point.size=2,
     point.style="circle",
     xAxis.log=FALSE,
     yAxis.log=FALSE,
@@ -101,7 +107,8 @@ plot.ggplot2 <- function(
   if(!all( c("ID","X","Y")%in% colnames(data))){
     stop("data must contain columns named ID, X, and Y")
   }
-  DATA <- data[,c("ID","X","Y")]
+  
+  DATA <- as.data.table(data)[,c("ID","X","Y")]
   
   if(all(is.na(plot.object)) ==TRUE){
     PLOT <- ggplot(
@@ -126,7 +133,7 @@ plot.ggplot2 <- function(
     
     if(plot.type =="line"){
       PLOT <- PLOT +
-        geom_line(size=2,linetype=line.style)
+        geom_line(size=line.size,linetype=line.style)
     }
     
     if(plot.type =="spline"){
@@ -136,7 +143,7 @@ plot.ggplot2 <- function(
     
     if(plot.type =="scatter"){
       PLOT <- PLOT +
-        geom_point(size=1.5,shape=point.style)
+        geom_point(size=point.size,shape=point.style)
     }
     
     
