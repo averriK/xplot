@@ -17,6 +17,8 @@
   color.palette = "viridis",
   plot.type = "line",
   line.style = "solid",
+  line.size = 1,
+  point.size = 2,
   point.style = "circle",
   xAxis.log = FALSE,
   yAxis.log = FALSE,
@@ -60,6 +62,10 @@
 \item{plot.type}{character c("line","spline","point","column","bar")}
 
 \item{line.style}{character c("solid","dashed","dotted","dotdash","longdash","twodash")}
+
+\item{line.size}{numeric}
+
+\item{point.size}{numeric}
 
 \item{point.style}{character c("circle","square","diamond","triangle","triangle-down")}
 

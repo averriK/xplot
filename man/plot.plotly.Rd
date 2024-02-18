@@ -22,6 +22,8 @@
   yAxis.log = FALSE,
   xAxis.reverse = FALSE,
   yAxis.reverse = FALSE,
+  line.size = 1,
+  point.size = 2,
   xAxis.max = NA,
   yAxis.max = NA,
   xAxis.min = NA,
@@ -70,6 +72,10 @@
 \item{xAxis.reverse}{boolean}
 
 \item{yAxis.reverse}{boolean}
+
+\item{line.size}{numeric}
+
+\item{point.size}{numeric}
 
 \item{xAxis.max}{numeric}
 

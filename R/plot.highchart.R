@@ -17,6 +17,8 @@
 #' @param yAxis.log boolean
 #' @param xAxis.reverse boolean
 #' @param yAxis.reverse boolean
+#' @param line.size numeric
+#' @param point.size numeric
 #' @param xAxis.max numeric
 #' @param yAxis.max numeric
 #' @param xAxis.min numeric
@@ -36,15 +38,11 @@
 #' 
 #' @examples
 #' data(iris)
-#' DT <- data.table(ID=iris$Species,X=iris$Sepal.Length,Y=iris$Sepal.Width)
-#' P1 <- plot.highchart(data=DT,plot.type="scatter")
-#' P1
-#' 
-#' # Multiple series
-#' DT2 <- DT[,.(X,Y=mean(Y)),by="ID"]
-#' P2 <- plot.highchart(data=DT2,plot.object=P1,plot.type="line")
-#' P2
-#' 
+#' DT <- data.frame(ID=iris$Species,X=iris$Sepal.Length,Y=iris$Sepal.Width)
+#' plot.highchart(data=DT,plot.type="scatter")
+#'
+#' @importFrom data.table data.table
+#' @importFrom data.table as.data.table 
 #' @importFrom grDevices hcl.colors
 #' @importFrom highcharter hc_add_series
 #' @importFrom highcharter hc_add_theme
@@ -79,6 +77,8 @@ plot.highchart <- function(
     plot.type="line",#line
     line.style="Solid",
     point.style="circle",
+    line.size=1,
+    point.size=2,
     xAxis.log=FALSE,
     yAxis.log=FALSE,
     xAxis.reverse=FALSE,
@@ -103,8 +103,8 @@ plot.highchart <- function(
     stop("data must contain columns named ID, X, and Y")
   }
   #
-  DATA <- data[,c("ID","X","Y")]
-
+  DATA <- as.data.table(data)[,c("ID","X","Y")]
+  
   TIP = "{{group.legend}}:{point.series.name}<br> {{xAxis.legend}}={point.x}<br> {{yAxis.legend}}={point.y}" |> epoxy::epoxy_html()
   COLORS <- grDevices::hcl.colors(n=max(2,length(unique(DATA$ID))),palette = color.palette)
   
