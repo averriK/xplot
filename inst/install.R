@@ -6,6 +6,6 @@ usethis::use_apache_license()
 devtools::document()
 devtools::check()
 remove.packages("xplot")
-# devtools::install()
+devtools::install()
 ## Commit Push
-remotes::install_github("averriK/xplot",auth_token = Sys.getenv("PAT"))
+# remotes::install_github("averriK/xplot",auth_token = Sys.getenv("PAT"))

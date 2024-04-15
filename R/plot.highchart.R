@@ -74,7 +74,7 @@ plot.highchart <- function(
     yAxis.legend="Y",
     group.legend="ID",
     color.palette="Viridis",
-    plot.type="line",#line
+    plot.type="line",#c("line","spline","point","column","bar")
     line.style="Solid",
     point.style="circle",
     line.size=1,
@@ -122,7 +122,7 @@ plot.highchart <- function(
     }
     
     #
-    if(plot.type=="scatter"){
+    if(plot.type %in% c("scatter","point")){
       
       PLOT <- PLOT |>
         hc_add_series(
