@@ -32,14 +32,14 @@
 #' @param plot.save boolean
 #'
 #' @return ggplot2 object
-#' @export plot.ggplot2
+#' @export buildPlot.ggplot2
 #' 
 #' @examples
 #' data(iris)
 #' DT <- data.frame(ID=iris$Species,X=iris$Sepal.Length,Y=iris$Sepal.Width)
-#' plot.ggplot2(data=DT)
+#' buildPlot.ggplot2(DT)
 #' 
-#' @importFrom data.table data.table
+#' @import data.table data.table
 #' @importFrom data.table as.data.table 
 #' @importFrom grDevices hcl.colors
 #' @importFrom ggplot2 aes
@@ -69,7 +69,7 @@
 #'
 #'
 
-plot.ggplot2 <- function(
+buildPlot.ggplot2 <- function(
     data,
     plot.object=NA,
     plot.title=NA,

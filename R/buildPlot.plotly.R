@@ -1,4 +1,4 @@
-#' plot.ggplot2.default
+#' Title
 #' @param plot.object plotly object
 #' @param plot.title character
 #' @param plot.subtitle character
@@ -32,12 +32,12 @@
 #' @param plot.save boolean
 #'
 #' @return plotly object
-#' @export plot.plotly
+#' @export buildPlot.plotly
 #' 
 #' @examples
 #' data(iris)
 #' DT <- data.frame(ID=iris$Species,X=iris$Sepal.Length,Y=iris$Sepal.Width)
-#' plot.plotly(data=DT)
+#' buildPlot.plotly(DT)
 #' 
 #' @importFrom data.table data.table
 #' @importFrom data.table as.data.table 
@@ -48,7 +48,7 @@
 
 
 
-plot.plotly <- function(
+buildPlot.plotly <- function(
     data,
     plot.object=NA,
     

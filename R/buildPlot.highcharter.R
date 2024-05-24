@@ -1,5 +1,3 @@
-#' plot.highchart.default
-#'
 #' Title
 #' @param plot.object highcharter object
 #' @param plot.title character
@@ -34,14 +32,14 @@
 #' @param plot.save boolean
 
 #' @return highcharter object
-#' @export plot.highchart
+#' @export buildPlot.highcharter
 #' 
 #' @examples
 #' data(iris)
 #' DT <- data.frame(ID=iris$Species,X=iris$Sepal.Length,Y=iris$Sepal.Width)
-#' plot.highchart(data=DT,plot.type="scatter")
+#' buildPlot.highcharter(DT,plot.type="scatter")
 #'
-#' @importFrom data.table data.table
+#' @import data.table data.table
 #' @importFrom data.table as.data.table 
 #' @importFrom grDevices hcl.colors
 #' @importFrom highcharter hc_add_series
@@ -63,7 +61,7 @@
 #' @importFrom epoxy epoxy_html
 #'
 
-plot.highchart <- function(
+buildPlot.highcharter <- function(
     data,
     plot.object=NA,
     plot.title=NA,
