@@ -1,11 +1,7 @@
-Package: xplot
+Package: buildPlot
 Title: Wrapper for popular plotting libraries
-Version: 0.0.1.2000
-Authors@R: 
-    person("Alejandro", "Verri Kozlowski", , "averri@fi.uba.ar", role = c("aut", "cre"),
-           comment = c(ORCID = "0000-0002-8535-1170"))
+Version: 0.2.0
 Description: Versatile wrappers for generating plots with popular libraries like Plotly, ggplot2, and highcharter.
-License: Apache License (>= 2)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.1
@@ -22,3 +18,7 @@ LazyData: true
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
+Authors@R: 
+    person("Alejandro", "Verri Kozlowski", , "averri@fi.uba.ar", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0002-8535-1170"))
+License: GPL (>= 3)
