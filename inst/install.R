@@ -14,4 +14,4 @@ devtools::document()
 devtools::check()
 remove.packages("buildPlot")
 ## Commit Push
-remotes::install_github("averriK/xplot")
+remotes::install_github("averriK/buildPlot")
