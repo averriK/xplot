@@ -6,7 +6,7 @@
 \usage{
 buildPlot.highcharter(
   data,
-  plot.object = NA,
+  plot.object = NULL,
   plot.title = NA,
   plot.subtitle = NA,
   plot.height = NA,

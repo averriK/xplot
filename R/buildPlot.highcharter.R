@@ -63,7 +63,7 @@
 
 buildPlot.highcharter <- function(
     data,
-    plot.object = NA,
+    plot.object = NULL,
     plot.title = NA,
     plot.subtitle = NA,
     plot.height = NA,
@@ -105,7 +105,7 @@ buildPlot.highcharter <- function(
   TIP = "{{group.legend}}:{point.series.name}<br> {{xAxis.legend}}={point.x}<br> {{yAxis.legend}}={point.y}" |> epoxy::epoxy_html()
   COLORS <- grDevices::hcl.colors(n = max(2, length(unique(DATA$ID))), palette = color.palette)
   
-  if (is.na(plot.object)) {
+  if (is.null(plot.object)) {
     PLOT <- highchart()
   } else {
     PLOT <- plot.object
