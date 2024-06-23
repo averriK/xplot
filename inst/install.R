@@ -13,6 +13,5 @@ usethis::use_gpl_license(version = 3, include_future = TRUE)
 devtools::document()
 devtools::check()
 remove.packages("buildPlot")
-devtools::install()
 ## Commit Push
-# remotes::install_github("averriK/xplot",auth_token = Sys.getenv("PAT"))
+remotes::install_github("averriK/xplot")
