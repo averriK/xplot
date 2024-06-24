@@ -30,6 +30,8 @@
 #' @param plot.theme highcharter object
 #' @param point.style character c("circle","square","diamond","triangle","triangle-down")
 #' @param plot.save boolean
+#' @param fill.polygon boolean
+#' @param fill.group character
 
 #' @return highcharter object
 #' @export buildPlot.highcharter
@@ -60,6 +62,11 @@
 #' @importFrom highcharter hc_subtitle
 #' @importFrom epoxy epoxy_html
 #'
+
+library(highcharter)
+library(data.table)
+library(epoxy)
+library(grDevices)
 
 buildPlot.highcharter <- function(
     data,
@@ -92,7 +99,9 @@ buildPlot.highcharter <- function(
     legend.valign = "top", # c("top", "middle", "bottom")
     legend.show = TRUE,
     plot.theme = hc_theme_hcrt(),
-    plot.save = FALSE
+    plot.save = FALSE,
+    fill.regions= FALSE,
+    fill.ID=""
 ){
   on.exit(expr = {rm(list = ls())}, add = TRUE)
   #
@@ -102,13 +111,34 @@ buildPlot.highcharter <- function(
   #
   DATA <- as.data.table(data)[, c("ID", "X", "Y")]
   
-  TIP = "{{group.legend}}:{point.series.name}<br> {{xAxis.legend}}={point.x}<br> {{yAxis.legend}}={point.y}" |> epoxy::epoxy_html()
+  TIP <- epoxy::epoxy_html("{{group.legend}}:{point.series.name}<br> {{xAxis.legend}}={point.x}<br> {{yAxis.legend}}={point.y}")
   COLORS <- grDevices::hcl.colors(n = max(2, length(unique(DATA$ID))), palette = color.palette)
   
   if (is.null(plot.object)) {
     PLOT <- highchart()
   } else {
     PLOT <- plot.object
+  }
+  
+  # Prepare data for the shaded region
+ 
+  if (fill.polygon==TRUE && length(unique(DATA$ID)) == 2) {
+    DT1 <- DATA[ID == ids[1]]
+    DT2 <- DATA[ID == ids[2]]
+    
+    # Create polygon points
+    polygon_data <- rbind(DT1, DT2[nrow(DT2):1, ], fill=TRUE)
+    polygon_data$ID <- fill.group
+    
+    PLOT <- PLOT |>
+      hc_add_series(
+        data = polygon_data,
+        type = "polygon",
+        hcaes(x = X, y = Y),
+        name = fill.group,
+        color = .hex_to_rgba(COLORS[1], 0.3),
+        fillOpacity = 0.3
+      )
   }
   
   # c("line","spline","point","column","bar")
@@ -224,5 +254,10 @@ buildPlot.highcharter <- function(
   }
   
   return(PLOT)
+}
+
+.hex_to_rgba <- function(hex, alpha = 1) {
+  rgb <- col2rgb(hex) / 255
+  paste0("rgba(", paste(c(rgb, alpha), collapse = ","), ")")
 }
 
