@@ -100,8 +100,8 @@ buildPlot.highcharter <- function(
     legend.show = TRUE,
     plot.theme = hc_theme_hcrt(),
     plot.save = FALSE,
-    fill.regions= FALSE,
-    fill.ID=""
+    fill.polygon= FALSE,
+    fill.group=""
 ){
   on.exit(expr = {rm(list = ls())}, add = TRUE)
   #
