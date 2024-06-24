@@ -123,8 +123,8 @@ buildPlot.highcharter <- function(
   # Prepare data for the shaded region
  
   if (fill.polygon==TRUE && length(unique(DATA$ID)) == 2) {
-    DT1 <- DATA[ID == ids[1]]
-    DT2 <- DATA[ID == ids[2]]
+    DT1 <- DATA[ID == unique(DATA$ID)[1]]
+    DT2 <- DATA[ID == unique(DATA$ID)[2]]
     
     # Create polygon points
     polygon_data <- rbind(DT1, DT2[nrow(DT2):1, ], fill=TRUE)
